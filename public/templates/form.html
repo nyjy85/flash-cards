@@ -1,0 +1,39 @@
+<div ng-controller="NewCardController">
+    <pre>{{ newCard | json }}</pre>
+    <form name="newCardForm" ng-submit="newCardForm.$valid && sendToBack(newCard) || clear()">
+
+        <input type="text" ng-model="newCard.question" name="question" required ng-minlength="12">
+        <span ng-show="newCardForm.question.$error.required">You must enter a question</span>
+        <span ng-show="newCardForm.question.$error.minlength">Too short!</span>
+
+        <select ng-model="newCard.category" name="category" required>
+            <option>Node</option>
+            <option>Angular</option>
+            <option>Express</option>
+            <option>MongoDB</option>
+        </select>
+        <span ng-show="newCardForm.category.$error.required">You need to pick a category</span>
+
+        <div>
+            <input type="text" ng-model="newCard.answers[0].text" name="answer1" ng-maxlength="40">
+            <span ng-show="newCardForm.answer1.$error.maxlength">The answer is too long!</span>
+            <input ng-model="newCard.answers[0].correct" type="checkbox" value="true">Correct
+        </div>
+
+         <div>
+            <input type="text" ng-model="newCard.answers[1].text" name="answer2" ng-maxlength="40">
+            <span ng-show="newCardForm.answer2.$error.maxlength">The answer is too long!</span>
+            <input ng-model="newCard.answers[1].correct" type="checkbox" value="true">Correct
+        </div>
+
+         <div>
+            <input type="text" ng-model="newCard.answers[2].text" name="answer3" ng-maxlength="40">
+            <span ng-show="newCardForm.answer3.$error.maxlength">The answer is too long!</span>
+            <input ng-model="newCard.answers[2].correct" type="checkbox" value="true">Correct
+        </div>
+        <!-- {{newCardForm.ans}} -->
+        
+        <input type="submit" value="Submit">
+    </form>
+    
+</div>

@@ -1,6 +1,7 @@
 var path = require('path');
 var express = require('express');
 var FlashCardModel = require('./models/flash-card-model');
+var bodyParser = require('body-parser');
 
 var app = express(); // Create an express app!
 module.exports = app; // Export it so it can be require('')'d
@@ -16,6 +17,9 @@ var indexHtmlPath = path.join(__dirname, '../index.html');
 
 // http://nodejs.org/api/path.html#path_path_join_path1_path2
 // for more information about path.join
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // When our server gets a request and the url matches
 // something in our public folder, serve up that file
@@ -47,3 +51,21 @@ app.get('/cards', function (req, res) {
     });
 
 });
+
+app.post('/cards', function(req, res){
+    console.log('this is req.body', req.body)
+    var question = req.body.question;
+    var category = req.body.category;
+    var answers = req.body.answers;
+    res.redirect('/');
+
+    // var newCard = new FlashCardModel({
+    //     question: question,
+    //     category: category,
+    //     answers: answers
+    // });
+    // newCard.save(function(){
+    //     res.redirect('/');
+    // })
+
+})
